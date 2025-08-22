@@ -6,73 +6,60 @@
 <title>Pinky’s Hen Party Guest List 💍✨🥂</title>
 <style>
   :root{
-    --blush-bg:#fde7f0;
-    --blush-fade:#fff5fa;
     --champagne:#f7e9d7;
+    --champagne-light:#fff3e0;
     --champagne-deep:#eadcc9;
     --ink:#1a1a1a;
     --radius:18px;
     --shadow:0 12px 34px rgba(0,0,0,.10);
     --pad:18px;
-
-    /* Rose-gold gradient */
-    --rose1:#f7d4c8;
-    --rose2:#e9b9a9;
-    --rose3:#f3cbbf;
-    --rose4:#dab1a3;
   }
 
   body{
     font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,sans-serif;
-    background:linear-gradient(135deg,var(--blush-bg),var(--blush-fade));
+    background:linear-gradient(135deg,#f7e9d7,#ffffff);
     margin:0;color:var(--ink);min-height:100dvh;position:relative;
   }
 
-  /* Background sparkles */
-  .sparkles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-  .sparkles span{
-    position:absolute;font-size:16px;opacity:.25;filter:saturate(90%);
-    animation:twinkle 3.5s ease-in-out infinite;will-change:transform,opacity;
-  }
-  @keyframes twinkle{0%,100%{opacity:.18;transform:scale(.9) translateY(0)}50%{opacity:.38;transform:scale(1) translateY(-2px)}}
-
   .wrap{
-    position:relative;z-index:1;max-width:820px;margin:5vh auto;background:#fff;border-radius:var(--radius);
-    box-shadow:var(--shadow);padding:clamp(16px,3.5vw,36px);border:1px solid var(--champagne-deep);
+    position:relative;z-index:1;max-width:820px;margin:5vh auto;background:#ffeef5;border-radius:var(--radius);
+    box-shadow:var(--shadow), inset 0 0 30px rgba(247,233,215,0.6);
+    padding:clamp(16px,3.5vw,36px);border:2px solid var(--champagne);
     animation:floatIn .6s ease-out both;
   }
   @keyframes floatIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes softPulse{0%,100%{transform:translateZ(0)}50%{transform:translateZ(0) scale(1.02)}}
   @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-  @keyframes cardIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-30px);opacity:0}}
 
   .tag{
     display:inline-flex;gap:6px;align-items:center;padding:6px 10px;border-radius:999px;font-size:12px;margin-bottom:10px;color:#7a5a2f;
-    background:linear-gradient(90deg,#f4e6cf 20%,#fff 40%,#f4e6cf 60%);background-size:200% 100%;animation:shimmer 2.5s linear infinite;border:1px solid #e7d7bd;
+    background:linear-gradient(90deg,#f4e6cf 20%,#fff 40%,#f4e6cf 60%);
+    background-size:200% 100%;animation:shimmer 2.5s linear infinite;border:1px solid #e7d7bd;
   }
+
   h1{font-size:clamp(28px,6vw,40px);margin:.2rem 0 .4rem;letter-spacing:.2px}
   .sub{font-size:clamp(15px,3.8vw,18px);opacity:.92;line-height:1.55}
 
-  /* Hero image: centered under intro */
+  /* Hero image */
   .heroimg{
-    max-width:min(220px,60vw);border-radius:50%;margin:18px auto 10px;display:none;
+    width:180px;height:180px;border-radius:50%;margin:18px auto 10px;display:block;object-fit:cover;object-position:center;
     box-shadow:0 10px 22px rgba(0,0,0,.14);border:4px solid #fff;animation:softPulse 4s ease-in-out infinite;
   }
+  @keyframes softPulse{0%,100%{transform:translateZ(0)}50%{transform:translateZ(0) scale(1.02)}}
 
+  /* Compliments tab full-width */
   .compliments{
-    display:flex;align-items:center;justify-content:center;gap:8px;background:#fbf4e9;border-left:4px solid #cfb68a;
-    padding:12px;border-radius:12px;margin:14px 0;color:#6c5a34;font-weight:600
+    display:flex;align-items:center;justify-content:center;
+    padding:12px;border-radius:12px;font-weight:600;margin:14px 0;color:#7a5a2f;font-size:14px;
+    background:linear-gradient(90deg,#f4e6cf 20%,#fff 40%,#f4e6cf 60%);
+    background-size:200% 100%;animation:shimmer 2.5s linear infinite;border:1px solid #e7d7bd;
   }
-  .compliments small{font-weight:500;opacity:.8}
+  .compliments small{font-weight:500;opacity:.85}
 
-  .card{border:1px solid #eee;border-radius:14px;padding:var(--pad);margin:14px 0;animation:cardIn .4s ease both}
+  .card{border:1px solid #eee;border-radius:14px;padding:var(--pad);margin:14px 0;background:#fff}
   .row{display:flex;flex-wrap:wrap;gap:10px}
   .row>*{flex:1 1 220px}
   label{font-size:13px;opacity:.75;display:block;margin-bottom:6px}
-  input,textarea{
-    width:100%;border:1px solid #e5e5e5;border-radius:12px;padding:12px 14px;font-size:16px;background:#fffdfb;
-  }
+  input,textarea{width:100%;border:1px solid #e5e5e5;border-radius:12px;padding:12px 14px;font-size:16px;background:#fffdfb}
   textarea{min-height:90px}
 
   .pill{display:inline-flex;align-items:center;gap:8px;background:#f6f6f7;padding:8px 10px;border-radius:999px;font-size:13px;margin-top:6px}
@@ -80,60 +67,44 @@
 
   .btn{border:0;border-radius:999px;padding:14px 18px;font-weight:700;cursor:pointer;transition:transform .08s ease,box-shadow .2s ease,opacity .2s ease}
   .btn:hover{transform:translateY(-1px)}
-  .add{background:linear-gradient(180deg,#ffd9e8,#ffeef6)}
 
-  /* Rose-gold animated “Send” button */
+  /* Add another guest button subtle blush */
+  .add{
+    background:linear-gradient(180deg,#ffe5f0,#fff6fa);
+    color:#5a3d47;
+    border:1px solid #f3d1dc;
+    border-radius:20px;
+    font-weight:600;
+  }
+  .add:hover{box-shadow:0 3px 8px rgba(243,209,220,.4)}
+
+  /* Remove button subtle champagne */
+  .guest .btn{
+    background:linear-gradient(180deg,#fdfaf6,#f7e9d7);
+    color:#6c5a34;
+    border:1px solid #eadcc9;
+    font-weight:600;
+    border-radius:20px;
+  }
+  .guest .btn:hover{background:linear-gradient(180deg,#f7e9d7,#f0e0c7)}
+
+  /* Send button back to rose gold */
   .submit{
     color:#fff;position:relative;
-    background:linear-gradient(90deg,var(--rose1),var(--rose2),var(--rose3),var(--rose4),var(--rose1));
-    background-size:300% 100%;
-    animation:gradientShift 6s ease-in-out infinite;
-    box-shadow:0 6px 18px rgba(218,177,163,.35);
+    background:linear-gradient(180deg,#e6b7a9,#f5d0c5);
+    box-shadow:0 6px 18px rgba(230,183,169,.5);
   }
-  @keyframes gradientShift{
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-  }
-  /* soft sheen pass */
-  .submit::before{
-    content:"";position:absolute;left:-40%;top:0;height:100%;width:40%;
-    background:linear-gradient(120deg,transparent,rgba(255,255,255,.35),transparent);
-    transform:skewX(-20deg);
-    animation:shine 4.5s ease-in-out infinite;
-  }
-  @keyframes shine{
-    0%{left:-40%}
-    60%{left:120%}
-    100%{left:120%}
-  }
-  /* Progress dots while sending */
   .submit.loading{opacity:.95}
-  .submit.loading::after{
-    content:" •  •  •";position:absolute;right:16px;top:50%;transform:translateY(-50%);
-    letter-spacing:2px;animation:dots 1s steps(4,end) infinite;
-  }
+  .submit.loading::after{content:" •  •  •";position:absolute;right:16px;top:50%;transform:translateY(-50%);letter-spacing:2px;animation:dots 1s steps(4,end) infinite}
   @keyframes dots{0%{opacity:.2}50%{opacity:1}100%{opacity:.2}}
 
   .ok{background:#e8fff1;color:#0b7a3b;padding:10px 12px;border-radius:10px;display:none;margin-top:12px}
   .err{background:#fff1f1;color:#a40000;padding:10px 12px;border-radius:10px;display:none;margin-top:12px}
 
-  /* Confetti for success */
-  .burst{position:absolute;pointer-events:none;font-size:20px;user-select:none;animation:floatUp 700ms ease-out forwards}
   .stage{position:relative}
-
-  /* Mobile tune-ups */
-  @media (max-width:480px){
-    .wrap{margin:3.5vh 10px;border-radius:16px}
-    .row>*{flex:1 1 100%}
-    .add{padding:14px}
-    .submit{padding:15px 18px}
-  }
 </style>
 </head>
 <body>
-<div class="sparkles" id="sparkles"></div>
-
 <div class="wrap stage">
   <span class="tag">hen party helper ✨ 💍 🥂</span>
   <h1>Hey Pinky! 💖</h1>
@@ -147,10 +118,8 @@
     The hen will be on <strong>Thursday 11th of September</strong>, so once this is done you can sit back, relax, and focus on your big day! 💖
   </p>
 
-  <!-- Hero photo goes here (centered under intro) -->
-  https://raw.githubusercontent.com/Tayte23/Pinky-guestlist/main/assets/pinky.jpg
+  <img id="hero" class="heroimg" src="assets/pinky.jpg" alt="Tariro (Pinky)">
 
-  <!-- Compliments tab -->
   <div class="compliments">
     <span id="complimentWord">Sophisticated</span> <small>• bride-to-be •</small> <span>✨</span>
   </div>
@@ -183,10 +152,7 @@
 </div>
 
 <script>
-/* ====== CONFIG ====== */
 const ENDPOINT = "YOUR_WEB_APP_URL_HERE";
-const SPARKLES_ON = true;
-/* ==================== */
 
 const guestList = document.getElementById('guestList');
 const addBtn = document.getElementById('addBtn');
@@ -197,36 +163,15 @@ const sisterNameInput = document.getElementById('sisterName');
 const globalNotesInput = document.getElementById('globalNotes');
 const hero = document.getElementById('hero');
 
-/* Hide hero if no URL yet */
 if (!hero.src || hero.src.includes('PHOTO_URL_HERE')) hero.style.display = 'none';
 
-/* Compliments rotator — your custom list */
 const words = ["Sophisticated","Smart","Elegant","Radiant","Gorgeous","Beautiful","Adventurous","Kind-Hearted"];
 const complimentEl = document.getElementById('complimentWord');
 let w = 0; setInterval(()=>{ w = (w+1)%words.length; complimentEl.textContent = words[w]; }, 2500);
 
-/* Background sparkles */
-if (SPARKLES_ON){
-  const s = document.getElementById('sparkles');
-  const glyphs = ["✦","✧","❈","✺","•"];
-  const count = 50;
-  const vw = Math.max(document.documentElement.clientWidth||0, window.innerWidth||0);
-  const vh = Math.max(document.documentElement.clientHeight||0, window.innerHeight||0);
-  for (let i=0;i<count;i++){
-    const sp=document.createElement('span');
-    sp.textContent=glyphs[Math.floor(Math.random()*glyphs.length)];
-    sp.style.left=Math.random()*vw+'px';
-    sp.style.top =Math.random()*vh+'px';
-    sp.style.animationDelay=(Math.random()*3)+'s';
-    sp.style.fontSize=(12+Math.random()*10)+'px';
-    s.appendChild(sp);
-  }
-}
-
 function guestCard(){
   const div=document.createElement('div');
   div.className='card guest';
-  div.style.animationDelay=(guestList.querySelectorAll('.guest').length*60)+'ms';
   div.innerHTML=`
     <div class="row">
       <div>
@@ -253,24 +198,6 @@ function addGuest(){ guestList.appendChild(guestCard()); }
 addBtn.addEventListener('click', addGuest);
 addGuest();
 
-/* Success confetti */
-function celebrate(){
-  const emojis=['💖','✨','🥂','🌸','🎉','💍'];
-  const stage=document.querySelector('.stage');
-  const rect=stage.getBoundingClientRect();
-  for(let i=0;i<12;i++){
-    const span=document.createElement('span');
-    span.className='burst';
-    span.textContent=emojis[Math.floor(Math.random()*emojis.length)];
-    span.style.left=(Math.random()*(rect.width-40)+10)+'px';
-    span.style.top =(submitBtn.offsetTop-10)+'px';
-    span.style.transform=`translateY(${Math.random()*8-4}px)`;
-    span.style.opacity=.9;
-    stage.appendChild(span);
-    setTimeout(()=>span.remove(),800);
-  }
-}
-
 async function submit(){
   okBox.style.display='none'; errBox.style.display='none';
   const cards=[...guestList.querySelectorAll('.card.guest')];
@@ -289,7 +216,7 @@ async function submit(){
   try{
     submitBtn.disabled=true; submitBtn.classList.add('loading'); submitBtn.textContent='Sending';
     await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-    okBox.style.display='block'; celebrate();
+    okBox.style.display='block';
     guestList.innerHTML=''; addGuest(); globalNotesInput.value='';
   }catch(e){
     errBox.textContent='Could not send. Please try again.'; errBox.style.display='block';
