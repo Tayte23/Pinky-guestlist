@@ -46,12 +46,19 @@
   }
   @keyframes softPulse{0%,100%{transform:translateZ(0)}50%{transform:translateZ(0) scale(1.02)}}
 
-  /* Compliments tab full-width */
+  /* Compliments tab */
   .compliments{
     display:flex;align-items:center;justify-content:center;
-    padding:12px;border-radius:12px;font-weight:600;margin:14px 0;color:#7a5a2f;font-size:14px;
+    padding:16px;                      /* taller */
+    border-radius:14px;
+    font-weight:700;
+    margin:18px 0;                     /* more spacing */
+    color:#7a5a2f;
+    font-size:18px;                    /* larger text */
     background:linear-gradient(90deg,#f4e6cf 20%,#fff 40%,#f4e6cf 60%);
-    background-size:200% 100%;animation:shimmer 2.5s linear infinite;border:1px solid #e7d7bd;
+    background-size:200% 100%;
+    animation:shimmer 2.5s linear infinite;
+    border:1px solid #e7d7bd;
   }
   .compliments small{font-weight:500;opacity:.85}
 
@@ -88,7 +95,7 @@
   }
   .guest .btn:hover{background:linear-gradient(180deg,#f7e9d7,#f0e0c7)}
 
-  /* Send button back to rose gold */
+  /* Send button rose gold */
   .submit{
     color:#fff;position:relative;
     background:linear-gradient(180deg,#e6b7a9,#f5d0c5);
@@ -98,7 +105,18 @@
   .submit.loading::after{content:" •  •  •";position:absolute;right:16px;top:50%;transform:translateY(-50%);letter-spacing:2px;animation:dots 1s steps(4,end) infinite}
   @keyframes dots{0%{opacity:.2}50%{opacity:1}100%{opacity:.2}}
 
-  .ok{background:#e8fff1;color:#0b7a3b;padding:10px 12px;border-radius:10px;display:none;margin-top:12px}
+  /* Success message — white + gold */
+  .ok{
+    background:#fff;
+    color:#bfa14a;
+    padding:12px 14px;
+    border-radius:12px;
+    display:none;
+    margin-top:14px;
+    font-weight:700;
+    text-align:center;
+  }
+
   .err{background:#fff1f1;color:#a40000;padding:10px 12px;border-radius:10px;display:none;margin-top:12px}
 
   .stage{position:relative}
@@ -106,7 +124,7 @@
 </head>
 <body>
 <div class="wrap stage">
-  <span class="tag">hen party helper ✨ 💍 🥂</span>
+  <span class="tag">Hen Party Helper ✨ 💍 🥂</span>
   <h1>Hey Pinky! 💖</h1>
 
   <p class="sub">
@@ -114,14 +132,14 @@
     Add the names of the lovely people you’d like to celebrate with.
   </p>
   <p class="sub">
-    No pressure — even just a couple of your closest ones is perfect.<br>
+    No pressure...even just a couple of your closest ones is perfect.<br>
     The hen will be on <strong>Thursday 11th of September</strong>, so once this is done you can sit back, relax, and focus on your big day! 💖
   </p>
 
   <img id="hero" class="heroimg" src="assets/pinky.jpg" alt="Tariro (Pinky)">
 
   <div class="compliments">
-    <span id="complimentWord">Sophisticated</span> <small>• bride-to-be •</small> <span>✨</span>
+    <span id="complimentWord">Sophisticated</span> <small>• Bride-To-Be •</small> <span>✨</span>
   </div>
 
   <div class="card">
@@ -141,11 +159,11 @@
 
   <div class="row" style="margin:12px 0;">
     <button class="btn add" id="addBtn">➕ Add another guest</button>
-    <span class="pill muted">Tip: contact can be phone or WhatsApp.</span>
+    <span class="pill muted">Tip: contact can be phone or WhatsApp. </span>
   </div>
 
   <button class="btn submit" id="submitBtn">Send to my planner 💌</button>
-  <div class="ok" id="okBox">Got it! Your guests were sent. You can add more anytime.</div>
+  <div class="ok" id="okBox">Got it! Your guests were sent. You can add more anytime! 😊</div>
   <div class="err" id="errBox">Hmm, that didn’t go through. Please try again.</div>
 
   <p class="muted" style="text-align:center;margin-top:14px">Made with love & confetti 🎉</p>
@@ -185,7 +203,7 @@ function guestCard(){
     </div>
     <div style="margin-top:10px;">
       <label>Notes</label>
-      <textarea placeholder="e.g., bridesmaid, vegan, travelling from Leeds" data-k="notes"></textarea>
+      <textarea placeholder="e.g., anything to note....." data-k="notes"></textarea>
     </div>
     <div style="display:flex;justify-content:flex-end;margin-top:8px;">
       <button type="button" class="btn" onclick="this.closest('.card').remove()">Remove</button>
