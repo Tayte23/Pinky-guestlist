@@ -140,7 +140,7 @@
       </div>
       <div>
         <label>Any notes for the planner?</label>
-        <input id="globalNotes" placeholder="Requests, Suggestions…">
+        <input id="globalNotes" placeholder="e.g.,"Requests, ideas, or Joey doesn’t share food moments...">
       </div>
     </div>
   </div>
@@ -148,11 +148,12 @@
   <div id="guestList"></div>
 
   <div class="row" style="margin:12px 0;">
-    <button class="btn add" id="addBtn">➕ Add another guest</button>
+    <button class="btn add" id="addBtn">➕ Add another guest (pivot!)</button>
+    <span class="pill">Tip: Send them to Janice’s laugh corner!🙉</span>
   </div>
 
   <button class="btn submit" id="submitBtn">Send to my planner 💌</button>
-  <div class="ok" id="okBox">Got it! Your guests were sent. You can add more anytime! 😊</div>
+  <div class="ok" id="okBox">“How you doin’?… Your guests are officially in!😏✨</div>
   <div class="err" id="errBox">Hmm, that didn’t go through. Please try again.</div>
 
   <p class="muted" style="text-align:center;margin-top:14px">Made with love & confetti 🎉</p>
@@ -186,12 +187,12 @@ function guestCard(){
   div.className='card guest';
   div.innerHTML=`
     <div class="row">
-      <div><label>Guest name</label><input placeholder="e.g., Alex Morgan" data-k="name" required></div>
-      <div><label>Guest contact</label><input placeholder="e.g., +44 7… or @WhatsApp" data-k="phone"></div>
+      <div><label>Guest name</label><input placeholder="e.g., Phoebe Buffay (Singer of Smelly Cat 🎶)" data-k="name" required></div>
+      <div><label>Guest contact</label><input placeholder="e.g., +44 71... or Central Perk booth #3 ☕" data-k="phone"></div>
     </div>
     <div style="margin-top:10px;">
       <label>Notes</label>
-      <textarea placeholder="e.g., anything to note...if anything..." data-k="notes"></textarea>
+      <textarea placeholder="e.g., Bring your lobster ❤️🦞&#10;Vegetarian option (Joey’s meatball sub not required)&#10;Will do a Phoebe-style wedding song performance 🎸" data-k="notes"></textarea>
     </div>
     <div style="display:flex;justify-content:flex-end;margin-top:8px;">
       <button type="button" class="btn" onclick="this.closest('.card').remove()">Remove</button>
