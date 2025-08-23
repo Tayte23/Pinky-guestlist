@@ -163,8 +163,8 @@
 <div class="confetti" id="confetti"></div>
 
 <script>
-/* Paste your Apps Script Web App URL below */
-const ENDPOINT = "https://script.google.com/macros/library/d/1m7gDJr3MV6QMEO4MiHJkd1Pw57eRiwcZDnFMLauWO7bdhWoADeQJAGHm/3";
+/* Apps Script Web App URL (new) */
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbzLGBvzujqXI3z06aAnuKFhNrkgKjB7xwcnUFRyKwiVLRlRrqWR_8VpOLN2ZgOz6VHcZg/exec";
 
 const guestList = document.getElementById('guestList');
 const addBtn = document.getElementById('addBtn');
@@ -240,7 +240,15 @@ async function submit(){
 
   try{
     submitBtn.disabled=true; submitBtn.classList.add('loading'); submitBtn.textContent='Sending';
-    await fetch(ENDPOINT, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+
+    // Note: 'no-cors' hides the response. If your Apps Script sends CORS headers,
+    // you can remove mode:'no-cors' and read JSON.
+    await fetch(ENDPOINT, {
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
 
     /* Celebrate: confetti + fade-in success */
     okBox.style.display='block';
