@@ -69,9 +69,6 @@
   input,textarea{width:100%;border:1px solid #e5e5e5;border-radius:12px;padding:12px 14px;font-size:16px;background:#fffdfb}
   textarea{min-height:90px}
 
-  .pill{display:inline-flex;align-items:center;gap:8px;background:#f6f6f7;padding:8px 10px;border-radius:999px;font-size:13px;margin-top:6px}
-  .muted{opacity:.65}
-
   .btn{border:0;border-radius:999px;padding:14px 18px;font-weight:700;cursor:pointer;transition:transform .08s ease,box-shadow .2s ease,opacity .2s ease}
   .btn:hover{transform:translateY(-1px)}
 
@@ -120,10 +117,25 @@
   .err{background:#fff1f1;color:#a40000;padding:10px 12px;border-radius:10px;display:none;margin-top:12px}
 
   .stage{position:relative}
+
+  /* Confetti */
+  .confetti-piece{
+    position:absolute;width:8px;height:14px;border-radius:2px;
+    opacity:.95;transform:translateY(-20px) rotate(0deg);
+    animation: confettiFall var(--dur) ease-out forwards, confettiSpin 900ms linear infinite;
+    will-change: transform, opacity;
+  }
+  @keyframes confettiFall{
+    to{ transform:translateY(var(--dy)) rotate(var(--rot)); opacity:.9; }
+  }
+  @keyframes confettiSpin{
+    from{ transform:translateY(var(--y,0)) rotate(0deg) }
+    to  { transform:translateY(var(--y,0)) rotate(360deg) }
+  }
 </style>
 </head>
 <body>
-<div class="wrap stage">
+<div class="wrap stage confetti-stage">
   <span class="tag">Hen Party Helper ✨ 💍 🥂</span>
   <h1>Hey Pinky! 💖</h1>
 
@@ -215,6 +227,33 @@ function addGuest(){ guestList.appendChild(guestCard()); }
 addBtn.addEventListener('click', addGuest);
 addGuest();
 
+// 🎉 Confetti helper
+function popConfetti(count = 80, spreadPx = 380, fallPx = 420, durationMs = 1200){
+  const stage = document.querySelector('.confetti-stage');
+  const colors = ['#FAD7A0','#F7E9D7','#FFC7DE','#E6B7A9','#FDEBD0','#FADADD'];
+  const originX = submitBtn.offsetLeft + submitBtn.offsetWidth/2;
+  const originY = submitBtn.offsetTop;
+
+  for (let i=0;i<count;i++){
+    const piece = document.createElement('span');
+    piece.className = 'confetti-piece';
+    const dx = (Math.random() - 0.5) * spreadPx;
+    const delay = Math.random() * 140;
+    const dur = durationMs + Math.random()*500;
+
+    piece.style.left = (originX + dx) + 'px';
+    piece.style.top  = (originY - 10) + 'px';
+    piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+    piece.style.setProperty('--dur', dur+'ms');
+    piece.style.setProperty('--dy', (fallPx + Math.random()*160)+'px');
+    piece.style.setProperty('--rot', (Math.random()*720-360)+'deg');
+    piece.style.animationDelay = delay+'ms';
+
+    stage.appendChild(piece);
+    setTimeout(()=> piece.remove(), dur + 800);
+  }
+}
+
 async function submit(){
   okBox.style.display='none'; errBox.style.display='none';
   const cards=[...guestList.querySelectorAll('.card.guest')];
@@ -234,6 +273,7 @@ async function submit(){
     submitBtn.disabled=true; submitBtn.classList.add('loading'); submitBtn.textContent='Sending';
     await fetch(ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
     okBox.style.display='block';
+    popConfetti();   // 🎉 Trigger confetti here
     guestList.innerHTML=''; addGuest(); globalNotesInput.value='';
   }catch(e){
     errBox.textContent='Could not send. Please try again.'; errBox.style.display='block';
