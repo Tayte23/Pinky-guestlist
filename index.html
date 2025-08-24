@@ -1,167 +1,3 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pinky’s Hen Party Guest List 💍✨🥂</title>
-<style>
-  :root{
-    --champagne:#f7e9d7;
-    --champagne-light:#fff3e0;
-    --champagne-deep:#eadcc9;
-    --ink:#1a1a1a;
-    --radius:18px;
-    --shadow:0 12px 34px rgba(0,0,0,.10);
-    --pad:18px;
-  }
-
-  body{
-    font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,sans-serif;
-    background:linear-gradient(135deg,#f7e9d7,#ffffff);
-    margin:0;color:var(--ink);min-height:100dvh;position:relative;
-  }
-
-  .wrap{
-    position:relative;z-index:1;max-width:820px;margin:5vh auto;background:#ffeef5;border-radius:var(--radius);
-    box-shadow:var(--shadow), inset 0 0 30px rgba(247,233,215,0.6);
-    padding:clamp(16px,3.5vw,36px);border:2px solid var(--champagne);
-    animation:floatIn .6s ease-out both;
-  }
-  @keyframes floatIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-
-  .tag{
-    display:inline-flex;gap:6px;align-items:center;padding:6px 10px;border-radius:999px;font-size:12px;margin-bottom:10px;color:#7a5a2f;
-    background:linear-gradient(90deg,#f4e6cf 20%,#fff 40%,#f4e6cf 60%);
-    background-size:200% 100%;animation:shimmer 2.5s linear infinite;border:1px solid #e7d7bd;
-  }
-
-  h1{font-size:clamp(28px,6vw,40px);margin:.2rem 0 .4rem;letter-spacing:.2px}
-  .sub{font-size:clamp(15px,3.8vw,18px);opacity:.92;line-height:1.55}
-
-  /* Hero image */
-  .heroimg{
-    width:180px;height:180px;border-radius:50%;margin:18px auto 10px;display:block;object-fit:cover;object-position:center;
-    box-shadow:0 10px 22px rgba(0,0,0,.14);border:4px solid #fff;animation:softPulse 4s ease-in-out infinite;
-  }
-  @keyframes softPulse{0%,100%{transform:translateZ(0)}50%{transform:translateZ(0) scale(1.02)}}
-
-  /* Compliments tab */
-  .compliments{
-    display:flex;align-items:center;justify-content:center;
-    padding:16px;border-radius:14px;font-weight:700;margin:18px 0;color:#7a5a2f;font-size:18px;
-    background:linear-gradient(90deg,#f4e6cf 20%,#fff 40%,#f4e6cf 60%);
-    background-size:200% 100%;animation:shimmer 2.5s linear infinite;border:1px solid #e7d7bd;
-  }
-  .compliments small{font-weight:500;opacity:.85}
-
-  .card{border:1px solid #eee;border-radius:14px;padding:var(--pad);margin:14px 0;background:#fff}
-  .row{display:flex;flex-wrap:wrap;gap:10px}
-  .row>*{flex:1 1 220px}
-  label{font-size:13px;opacity:.75;display:block;margin-bottom:6px}
-  input,textarea{width:100%;border:1px solid #e5e5e5;border-radius:12px;padding:12px 14px;font-size:16px;background:#fffdfb}
-  textarea{min-height:90px}
-
-  .btn{border:0;border-radius:999px;padding:14px 18px;font-weight:700;cursor:pointer;transition:transform .08s ease,box-shadow .2s ease,opacity .2s ease}
-  .btn:hover{transform:translateY(-1px)}
-
-  .add{
-    background:linear-gradient(180deg,#ffe5f0,#fff6fa);
-    color:#5a3d47;border:1px solid #f3d1dc;border-radius:20px;font-weight:600;
-  }
-  .add:hover{box-shadow:0 3px 8px rgba(243,209,220,.4)}
-
-  .guest .btn{
-    background:linear-gradient(180deg,#fdfaf6,#f7e9d7);
-    color:#6c5a34;border:1px solid #eadcc9;font-weight:600;border-radius:20px;
-  }
-  .guest .btn:hover{background:linear-gradient(180deg,#f7e9d7,#f0e0c7)}
-
-  /* Send button */
-  .submit{
-    color:#fff;position:relative;
-    background:linear-gradient(180deg,#e6b7a9,#f5d0c5);
-    box-shadow:0 6px 18px rgba(230,183,169,.5);
-    margin-top:26px; /* extra room for confetti */
-  }
-  .submit.loading{opacity:.95}
-  .submit.loading::after{
-    content:" •  •  •";position:absolute;right:16px;top:50%;
-    transform:translateY(-50%);letter-spacing:2px;animation:dots 1s steps(4,end) infinite
-  }
-  @keyframes dots{0%{opacity:.2}50%{opacity:1}100%{opacity:.2}}
-
-  /* Success bar: white + gold + fade-in */
-  .ok{
-    background:#fff;color:#bfa14a;padding:12px 14px;border-radius:12px;
-    display:none;margin-top:14px;font-weight:700;text-align:center;
-    opacity:0; transform:translateY(6px);
-    transition:opacity .45s ease, transform .45s ease, box-shadow .45s ease;
-  }
-  .ok.show{
-    display:block; /* set via JS then animate */
-    opacity:1; transform:translateY(0);
-    box-shadow:0 8px 24px rgba(191,161,74,.12);
-  }
-
-  .err{background:#fff1f1;color:#a40000;padding:10px 12px;border-radius:10px;display:none;margin-top:12px}
-
-  /* Confetti */
-  .confetti { position:fixed; inset:0; pointer-events:none; overflow:hidden; z-index:9999; }
-  .confetti span { position:absolute; top:-10px; font-size:24px; animation:fall linear forwards; }
-  @keyframes fall { to { transform:translateY(100vh) rotate(360deg); opacity:0; } }
-</style>
-</head>
-<body>
-<div class="wrap stage">
-  <span class="tag">Your Hen Party Planner ✨ 💍 🥂</span>
-  <h1>Hey Pinky! 💖</h1>
-
-  <p class="sub">
-    It’s time to put together your <strong>VIP hen party guest list</strong> 💍🥂<br>
-    Add the names of the lovely people you’d like to celebrate with.
-  </p>
-  <p class="sub">
-    No pressure...even just a couple of your closest ones is perfect.<br>
-    The hen will be on <strong>Thursday 11th of September</strong>, so once this is done you can sit back, relax, and focus on your big day! 💖
-  </p>
-
-  <img id="hero" class="heroimg" src="assets/pinky.jpg" alt="Tariro (Pinky)">
-
-  <div class="compliments">
-    <span id="complimentWord">Sophisticated</span> <small>• Bride-To-Be •</small> <span>✨</span>
-  </div>
-
-  <div class="card">
-  <div class="row">
-    <div>
-      <label>Your name</label>
-      <input id="sisterName" value="Tariro (Pinky)" readonly>
-    </div>
-    <div>
-      <label>Any notes for the planner?</label>
-      <input id="globalNotes" placeholder="e.g., Could I *BE* any clearer?..Suggestions?....🤔">
-    </div>
-  </div>
-</div>
-
-
-  <div id="guestList"></div>
-
-  <div class="row" style="margin:12px 0;">
-    <button class="btn add" id="addBtn">➕ Add another guest (pivot!)</button>
-    <span class="pill">Tip: Send them to Janice’s laugh corner!🙉</span>
-  </div>
-
-  <button class="btn submit" id="submitBtn">Send to my planner 💌</button>
-  <div class="ok" id="okBox">“How you doin’?… Your guests are officially in!😏✨</div>
-  <div class="err" id="errBox">Hmm, that didn’t go through. Please try again.</div>
-
-  <p class="muted" style="text-align:center;margin-top:14px">Made with love & confetti 🎉</p>
-</div>
-
-<div class="confetti" id="confetti"></div>
-
 <script>
 /* Apps Script Web App URL (new) */
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbyFpEyd3Sd7h6Iq4ECwRHNiiI2Oapa4yRMskVKC-BbjYbsIwFUbtZPz_7y4-XA-FhgPIg/exec";
@@ -219,13 +55,28 @@ function launchConfetti(){
   setTimeout(()=>confetti.innerHTML='',5000);
 }
 
-/* Submit handler */
+/* Helpers */
+function showError(msg){
+  errBox.textContent = msg || 'Could not send. Please try again.';
+  errBox.style.display='block';
+}
+function showSuccess(text){
+  okBox.textContent = text;
+  okBox.style.display='block';
+  requestAnimationFrame(()=> okBox.classList.add('show'));
+  launchConfetti();
+}
+
+/* Submit handler with JSON + timeout */
 async function submit(){
   okBox.classList.remove('show'); okBox.style.display='none';
   errBox.style.display='none';
 
   const cards=[...guestList.querySelectorAll('.card.guest')];
-  if(!cards.length){ errBox.textContent='Add at least one guest name.'; errBox.style.display='block'; return; }
+  if(!cards.length){
+    showError('Add at least one guest name.');
+    return;
+  }
 
   const guests=cards.map(card=>{
     const obj={}; card.querySelectorAll('[data-k]').forEach(i=>obj[i.dataset.k]=i.value.trim());
@@ -238,32 +89,42 @@ async function submit(){
     guests
   };
 
+  const controller = new AbortController();
+  const t = setTimeout(()=>controller.abort(), 12000); // 12s timeout
+
   try{
     submitBtn.disabled=true; submitBtn.classList.add('loading'); submitBtn.textContent='Sending';
 
-    // Note: 'no-cors' hides the response. If your Apps Script sends CORS headers,
-    // you can remove mode:'no-cors' and read JSON.
-    await fetch(ENDPOINT, {
+    const res = await fetch(ENDPOINT, {
       method:'POST',
-      mode:'no-cors',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(payload)
+      headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify(payload),
+      signal: controller.signal
     });
+    clearTimeout(t);
 
-    /* Celebrate: confetti + fade-in success */
-    okBox.style.display='block';
-    requestAnimationFrame(()=> okBox.classList.add('show'));
-    launchConfetti();
+    if (!res.ok) {
+      const txt = await res.text().catch(()=> '');
+      throw new Error(`Server error (${res.status}) ${txt}`);
+    }
 
-    /* Reset inputs */
+    // Expect: { ok:true, submissionId, guestsAdded }
+    const data = await res.json().catch(()=> ({}));
+    if (!data.ok) throw new Error('Submission failed on server.');
+
+    showSuccess(`“How you doin’?” Guests saved: ${data.guestsAdded} ✨`);
+
+    // Reset inputs
     guestList.innerHTML=''; addGuest(); globalNotesInput.value='';
   }catch(e){
-    errBox.textContent='Could not send. Please try again.'; errBox.style.display='block';
+    if (e.name === 'AbortError') {
+      showError('Network timeout. Please try again.');
+    } else {
+      showError(e.message || 'Could not send. Please try again.');
+    }
   }finally{
     submitBtn.classList.remove('loading'); submitBtn.disabled=false; submitBtn.textContent='Send to my planner 💌';
   }
 }
 submitBtn.addEventListener('click', submit);
 </script>
-</body>
-</html>
